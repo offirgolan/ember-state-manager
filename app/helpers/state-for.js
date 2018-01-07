@@ -1,1 +1,1 @@
-export { default, stateFor } from 'ember-state-manager/helpers/state-for';
+export { default } from 'ember-state-manager/helpers/state-for';
