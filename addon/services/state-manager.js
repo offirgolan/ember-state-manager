@@ -45,7 +45,12 @@ export default Service.extend({
 
   _createStateFor(stateName, model) {
     const factory = getOwner(this).factoryFor(`state:${stateName}`);
-    const initialState = canInvoke(factory.class, 'initialState') ? factory.class.initialState(model) : {};
+
+    assert(`[ember-state-manager] State type of '${stateName}' not found`, factory);
+
+    const initialState = canInvoke(factory.class, 'initialState') ?
+                         factory.class.initialState(model) :
+                         {};
 
     return factory.create(initialState);
   }
