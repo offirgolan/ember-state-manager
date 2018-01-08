@@ -43,15 +43,25 @@ export default Service.extend({
     return stateMap.get(model);
   },
 
+  deleteStateFor(model, stateName, options = {}) {
+    assert(`[ember-state-manager] You must pass a state name into 'deleteStateFor'`, !isNone(stateName));
+
+    const stateMap = this.stateMapFor(stateName, options.bucketName);
+
+    if (!isNone(model) && stateMap.has(model)) {
+      stateMap.delete(model);
+    }
+  },
+
   _createStateFor(stateName, model) {
     const factory = getOwner(this).factoryFor(`state:${stateName}`);
 
     assert(`[ember-state-manager] State type of '${stateName}' not found`, factory);
 
-    const initialState = canInvoke(factory.class, 'initialState') ?
-                         factory.class.initialState(model) :
-                         {};
-
-    return factory.create(initialState);
+    return factory.create(
+      canInvoke(factory.class, 'initialState') ?
+      factory.class.initialState(model) :
+      {}
+    );
   }
 });

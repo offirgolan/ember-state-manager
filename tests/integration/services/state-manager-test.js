@@ -49,6 +49,18 @@ test('it creates bucketed states', function(assert) {
   assert.notEqual(stateManager.stateFor(model, 'object', { bucketName: 'a' }), stateManager.stateFor(model, 'object'), { bucketName: 'a' });
 });
 
+test('it can delete state', function(assert) {
+  assert.expect(2);
+
+  const stateManager = this.subject();
+  const model = {};
+  const state = stateManager.stateFor(model, 'object', { bucketName: 'a' });
+
+  assert.ok(state);
+  stateManager.deleteStateFor(model, 'object', { bucketName: 'a' });
+  assert.notEqual(state, stateManager.stateFor(model, 'object', { bucketName: 'a' }));
+});
+
 test('it handles a falsy model', function(assert) {
   assert.expect(1);
 

@@ -1,17 +1,19 @@
 {
   "name": "ember-state-manager",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "An Ember state management solution",
   "keywords": [
     "ember-addon"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Offir Golan <offirgolan@gmail.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/offirgolan/ember-state-manager",
+  "bugs": "https://github.com/offirgolan/ember-state-manager/issues",
+  "homepage": "https://github.com/offirgolan/ember-state-manager",
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
