@@ -4,10 +4,10 @@ import { getOwner } from '@ember/application';
 import { computed, get } from '@ember/object';
 import { isNone, isEmpty } from '@ember/utils';
 import { assert } from '@ember/debug';
+import { tryInvoke } from '@ember/utils';
 
 const {
-  canInvoke,
-  WeakMap
+  WeakMap,
 } = Ember;
 
 export default Service.extend({
@@ -59,9 +59,7 @@ export default Service.extend({
     assert(`[ember-state-manager] State type of '${stateName}' not found`, factory);
 
     return factory.create(
-      canInvoke(factory.class, 'initialState') ?
-      factory.class.initialState(model) :
-      {}
+      tryInvoke(factory.class, 'initialState', [model]) || {}
     );
   }
 });
